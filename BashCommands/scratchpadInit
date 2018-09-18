@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if i3-msg -t get_tree | jq -r '' | grep "\"scratchpad_state\": \"changed\""
+then
+    i3-msg [window_role="dropdown"] scratchpad show;
+else
+    terminator -r "dropdown";
+    i3-msg [window_role="dropdown"] scratchpad show;
+fi

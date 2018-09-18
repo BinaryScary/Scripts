@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for i in /proc/asound/card*/pcm*/sub*/status; do
+    if grep -q "state: RUNNING" $i
+    then
+        exit;
+    fi
+done
+systemctl suspend-then-hibernate &

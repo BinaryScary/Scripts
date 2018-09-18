@@ -1,0 +1,4 @@
+#!/bin/bash
+xrandr --output HDMI2 --auto --output eDP1 --auto --right-of HDMI2
+#xrandr --output HDMI2 --brightness 0.5
+feh --bg-fill /home/sam/Downloads/Backgrounds/Fire.jpg --bg-fill /home/sam/Downloads/Backgrounds/HillCity.png 

@@ -1,0 +1,4 @@
+#!/bash/bin
+#copies to clipboard
+#place in /usr/bin or any other sys PATH
+echo -n ${PWD/ /\\ } | xclip -i

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if xrandr | grep "HDMI2 connected"
+then
+    dualmonitor;
+fi

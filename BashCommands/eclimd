@@ -1,0 +1,3 @@
+#!/bin/bash
+# Runs eclimd server
+/home/sam/.eclipse/org.eclipse.platform_4.7.2_155965261_linux_gtk_x86_64/eclimd -Dosgi.instance.area.default=/home/sam/Dropbox/School/Year_3/Semester2/COMP3004B/Project
