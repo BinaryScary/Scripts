@@ -1,4 +1,4 @@
 #!/bin/bash
 xrandr --output HDMI2 --brightness 1
 xrandr --output HDMI2 --off
-feh --bg-fill /home/sam/Downloads/Backgrounds/Fire.jpg
+feh --bg-fill /home/sam/Images/Backgrounds/Fire.jpg

@@ -1,0 +1,8 @@
+#!/bin/bash
+sleep 1m
+
+discharging=`acpi | grep Discharging | wc -l`
+
+if [ $discharging -eq 1 ]; then
+    systemctl hibernate
+fi

@@ -1,0 +1,2 @@
+#!/bin/bash
+google-chrome-stable --proxy-server=127.0.0.1:8080 --user-data-dir=/home/sam/.config/google-chrome/Profile 2/Default

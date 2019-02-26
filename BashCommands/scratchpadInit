@@ -3,7 +3,9 @@
 if i3-msg -t get_tree | jq -r '' | grep "\"scratchpad_state\": \"changed\""
 then
     i3-msg [window_role="dropdown"] scratchpad show;
+    xdotool mousemove --window $(wmctrl -l | grep "Scratchpad" | awk '{print $1;}') 5 5
 else
-    terminator -r "dropdown";
+    terminator -T "Scratchpad" -r "dropdown";
     i3-msg [window_role="dropdown"] scratchpad show;
+    xdotool mousemove --window $(wmctrl -l | grep "Scratchpad" | awk '{print $1;}') 5 5
 fi

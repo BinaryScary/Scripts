@@ -1,0 +1,2 @@
+BashCommands are symlnked to /bin directory
+sudo ln -s fullpath-file /bin

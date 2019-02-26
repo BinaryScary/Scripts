@@ -1,0 +1,23 @@
+#!/bin/bash
+
+pSpot = $(ps -elf | grep spotify | grep -v grep)
+
+if [ -z "$pSpot" ]
+then
+    i3-msg 'workspace 3; exec DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus spotify &'
+    until pids=$(pidof spotify)
+    do
+        sleep 1
+    done
+    # extra sleep just so dBus can recieve
+    sleep 2
+fi
+
+case $1 in
+    "main")
+        playerctl open spotify:user:basedthug156:playlist:0tq0Jxiexoa9yIFHnIEODR;;
+    "sex")
+        playerctl open spotify:user:basedthug156:playlist:4YDfCMAVZJV3BGpuLX1IdV;;
+    "chill")
+        playerctl open spotify:user:chillhopmusic:playlist:0CFuMybe6s77w6QQrJjW7d;;
+esac

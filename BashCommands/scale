@@ -1,0 +1,10 @@
+#!/bin/bash
+DPI=1.5
+while getopts d option
+do
+    case "${option}"
+        in
+        d) DPI=${OPTARG};;
+    esac
+done
+GDK_DPI_SCALE=$DPI $1

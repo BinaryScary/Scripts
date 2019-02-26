@@ -6,4 +6,5 @@ for i in /proc/asound/card*/pcm*/sub*/status; do
         exit;
     fi
 done
+echo 'running xautolock: shutdownSound' | systemd-cat
 systemctl suspend-then-hibernate &

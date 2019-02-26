@@ -1,0 +1,2 @@
+#!/bin/bash
+xdotool mousemove --window $(wmctrl -l | grep "Scratchpad" | awk '{print $1;}') 0 0
