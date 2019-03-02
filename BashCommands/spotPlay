@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pSpot = $(ps -elf | grep spotify | grep -v grep)
+pSpot=$(ps -elf | grep spotify | grep -v grep)
 
 if [ -z "$pSpot" ]
 then
