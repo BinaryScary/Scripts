@@ -1,0 +1,128 @@
+Reconnaissance -> Scanning -> Exploitation -> Maintaining Access
+
+Topics:
+    offensive security/ethical Hacking
+    web Application security
+    system security
+    reverse engineering
+    tool development
+    malware Analysis 
+    defensive security
+    software security
+    digital forensics
+    wireless security
+
+Web Security Mechanisms:
+    Authentication
+    Session Management
+    Access Control
+
+
+Directory brute forcer: dirbuster
+    Raft lists
+
+Login brute forcer: medusa
+    medusa -h [target_host_ip] -u [user] -P [pass_diction] -M [Service]
+    - lowercase u/p are single entries, uppercase for files
+
+Google Info gatherer: metagoofil
+    - Usernames
+
+Subdomain scanner: recon-ng
+
+RPC(Remote Procedure Call) Scanner: rpcinfo
+    rpcinfo -p 192.168.0.1
+
+IP/Port Scanner: nmap / zenmap
+    ***use sudo for most nmap commands***
+    - sudo nmap -sn 192.168.0.1/24 
+        ping scan (no ports) also known as ping sweep
+    - nmap -Pn 192.168.0.1/24
+        Skip Ping, good for firewall bypass
+    - nmap -sS 192.168.0.1/24
+        TCP SYN port scan (Default)
+        SYN - SYN/ACK - RST
+    - nmap -sT 192.168.0.1/24
+        TCP port scan
+        SYN - SYN/ACK - ACK - DATA - RST
+    - nmap -sU 192.168.0.1/24
+        UDP scan (Slow)
+        -sV or -sUV to get more information from open UDP ports
+            open | filtered -> open
+    - nmap -sV 192.168.0.1/24
+        Probe open ports for service/version info
+    - nmap -sX 192.168.0.1/24
+        Xmas Tree scan FIN,PSH,URG flag set (Only good for Unix/Linux systems)
+    - nmap -sN 192.168.0.1/24
+        Null Scan, opposite of xmas scan (both scans don't use SYN flag)
+    - nmap -A 192.168.0.1/24
+        Enable OS, Version, script, traceroute scanning
+    - nmap -v(vv) 192.168.0.1/24
+        increase verbosity
+    - nmap -T<0-5> 192.168.0.1/24
+        set timing (stealth - aggressive)
+    - nmap -p- 192.168.0.1/24
+        scan all ports
+        default is scanning 1000 most common
+    -while scanning:
+        p : packet tracing
+        Shift+p : close packet tracing
+        anykey : check status
+
+OSINT gatherer: theHarvester
+    theHarvester -d [domain] -l [results] -b [search]
+
+Domain info: whois
+    whois [domain]
+
+IP resolver: host
+    host [domain]
+
+dns lookup: nslookup
+    nslookup [ip]
+
+Strings of binary: strings
+
+C/C++ Debugger: gdb
+
+Disassembly: objdump
+    disassemble file: objdump -d file
+    
+Exploit framework: metasploit 
+    cli: msfconsole
+    update repo: msfupdate
+        -search , use , options , set , run
+    gui: Armitage 
+
+Vulnerability Scanner: nessus
+    https://localhost:8834
+
+Hash Cracker: john_the_ripper
+    test performance: john --test
+
+Fuzzer: sfuzz
+
+File type: file
+    check if stripped
+    check signature of magic number
+
+Secure Shell: ssh
+    reverse ssh tunnel: ssh -f -R newPort:localhost:sshPort user@sshIP -p sshPort
+    ssh Custom Privatekey: ssh -i user@ip
+    command on connect ssh: ssh user@ip command
+        -good for instantly closing ssh
+
+unsecure message/shell: Telnet
+    message port: telnet ip port
+
+message ssl: openssl
+    connect to ssl server: openssl s_client -connect ip@port
+
+TCP/IP read/write: netcat
+    listen to port: nc -l -p [port]
+    pipe sender to a file: nc -l -p [port] < "file.txt"
+    pip a file to listener: nc [host] [port] < [file]
+    netcat udp: nc -u [host] [port]
+    backdoor shell: nc -l -p [port] -e /bin/sh
+
+OOB reciever: python -m simpleHTTPsever [port]
