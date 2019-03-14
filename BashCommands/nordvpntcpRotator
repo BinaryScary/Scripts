@@ -1,0 +1,30 @@
+#!/bin/bash
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sysctl -w net.ipv6.conf.default.disable_ipv6=1
+while :
+do
+
+    vpn=$(ls /etc/openvpn/ovpn_tcp | grep 'ca\|us' | sort -R | tail -1)
+    vip=$(grep "remote " /etc/openvpn/ovpn_tcp/$vpn | awk  '{print $2}')
+
+    if ping -c 1 $vip &> /dev/null
+    then
+        echo $vpn
+    else
+        continue
+    fi
+
+    kill $(pgrep openvpn)
+    # leak when switching vpns, could use failsafe but buggy
+    openvpn --config /etc/openvpn/ovpn_tcp/$vpn --auth-user-pass /etc/openvpn/pass.txt --script-security 2 --up /etc/openvpn/update-resolv-conf.bash --down /etc/openvpn/update-resolv-conf.bash &
+    sleep 60
+    # add argument to adjust time difference
+    echo "***Rotating***"
+done
+sysctl -w net.ipv6.conf.all.disable_ipv6=0
+sysctl -w net.ipv6.conf.default.disable_ipv6=0
+sysctl --system

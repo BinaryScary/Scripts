@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if xrandr | grep "HDMI2 connected"
+then
+    dualmonitor;
+    usbKeyboard;
+else
+    dualmonitoroff;
+    laptopKeyboard;
+fi

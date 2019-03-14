@@ -17,9 +17,11 @@ Web Security Mechanisms:
     Session Management
     Access Control
 
+Wordlists: /usr/share
 
-Directory brute forcer: dirbuster
+Directory brute forcer: dirbuster / dirbuster
     Raft lists
+    dirb director brute forcer: dirb http://[ip]/ [wordlist]
 
 Login brute forcer: medusa
     medusa -h [target_host_ip] -u [user] -P [pass_diction] -M [Service]
@@ -27,6 +29,15 @@ Login brute forcer: medusa
 
 Google Info gatherer: metagoofil
     - Usernames
+
+Web File Vulnerability Scanner: nikto
+    scan host: nikto -h [ip]
+
+Site Identifier/Content: whatweb
+    scan / identify website: whatweb -v [ip/domain]
+
+Vulnerability Scanner: nessus
+    https://localhost:8834
 
 Subdomain scanner: recon-ng
 
@@ -68,8 +79,9 @@ IP/Port Scanner: nmap / zenmap
         p : packet tracing
         Shift+p : close packet tracing
         anykey : check status
+    - /usr/share/nmap/scripts scripts location
 
-OSINT gatherer: theHarvester
+OSINT info/email gatherer: theHarvester
     theHarvester -d [domain] -l [results] -b [search]
 
 Domain info: whois
@@ -78,8 +90,12 @@ Domain info: whois
 IP resolver: host
     host [domain]
 
-dns lookup: nslookup
+dns lookup: nslookup | dig
     nslookup [ip]
+    dig [domain]
+
+dns zone transfer: dig
+    dns zone transfer: dig axfr [domain] @[dns server]
 
 Strings of binary: strings
 
@@ -93,9 +109,6 @@ Exploit framework: metasploit
     update repo: msfupdate
         -search , use , options , set , run
     gui: Armitage 
-
-Vulnerability Scanner: nessus
-    https://localhost:8834
 
 Hash Cracker: john_the_ripper
     test performance: john --test

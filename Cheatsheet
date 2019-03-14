@@ -2,6 +2,7 @@ File Explorer: ranger $mod+e, GTK defualt for other programs
 Browser: google-chrome-stable $mod+w
     restore last session $mod+shift+w
     incognito $mod+shift+n
+    - to drag and drop file ctrl+o
 Terminal: Terminator $mod+Return
 D-menu wrapper: rofi $mod+d
 spotify: spotify $mod+s
@@ -14,8 +15,11 @@ move window: $mod+click drag
 find window: $mod+;
 
 find file: sudo find / -name 
+    - supports wilds cards *
+
 find exact word string: grep -rnw '/' -e 'pattern'
-find word string: grep -rni '/' -e 'pattern'
+find word: grep -rni '/' -e 'pattern'
+
 find string in pdf: pdfgrep -Hirn 'pattern'
 fuzzy finder: fzf
 
@@ -26,8 +30,12 @@ Bash fzf:
     Ctrl+r: history fuzzy finder
     Ctrl+t: file fuzzy finder
     Alt+c: cd fuzzy finder
+
+shell shortcuts:
     Ctrl+u: undo command
     Ctrl+y: paste undone command
+    Ctrl+c: clear prompt / also halts processes
+    Alt+h: man page command in prompt
     vimmode+v: enter command editor
 
 sh to bash sym link check: file -h /bin/sh
@@ -44,8 +52,9 @@ scripts path: binary
     all users: /usr/local/bin 
     root only: /usr/local/sbin
 
-
 Enviroment Variables: env
+    set env var: export [var]=[value]
+    unset env var: unset [var]
 
 disown process: disown
     disown all: disown -a
@@ -62,15 +71,18 @@ Monitor:
 Package Manager: pacman
     Update Packages: pacman -Syu
     Update database: pacman -Syy
+    remove cached packages: pacman -Sc
         - useful when for package retrieve error
     Search downloaded Packages: pacman -Q
     list all files owned: pacman -Ql
     Search downloaded Packages regex: pacman -Qs
     Search database: pacman -Ss
     Remove + unneed dependecies: pacman -Rs
+    Remove + unneed dependecies + system config: pacman -Rns
     Local made package install: pacman -U pkgname-pkgver.pkg.tar.xz
     remove orphan packages: pacman -Rns $(pacman -Qtdq)
     list explicitly downloaded packages: pacman -Qe
+    list orphaned dependencies (build packages): pacman -Qdt
     sort installed by size: paste <(pacman -Q | awk '{ print $1; }' | xargs pacman -Qi | grep 'Size' | awk '{ print $4$5; }') <(pacman -Q | awk '{print $1; }') | sort -n | column -t
 
 Local Packages: makepkg
@@ -78,6 +90,7 @@ Local Packages: makepkg
     install package: makepkg --install
 
 downgrade package: downgrade
+
 Aur Package Manager: yaourt
     Update Aur Packages: yaourt -Syua
     no confirmation: yaourt -Syua --noconfirm
@@ -134,6 +147,8 @@ vpn: openvpn
     - vm's must be on nat mode to use vpn
     - vpnfailsafe.sh and vpnfailsafe_reset
 
+reset openvpn failsafe: sudo /usr/share/doc/vpnfailsafe/vpnfailsafe_reset.sh
+
 ssh: ssh
     start ssh server: sudo systemctl start sshd
         server config: /etc/ssh/sshd_config
@@ -178,8 +193,14 @@ public ip:
 private ip: ip addr show wlp4s0
 
 network interface down/up: ip link set dev interface down|up
-Change MAC addr: ip link set dev interface address XX:XX:XX:XX:XX:XX
-    - interface has to be down first
+Change MAC addr: ip / macchanger
+    change mac addr ip: ip link set dev interface address XX:XX:XX:XX:XX:XX
+        - interface has to be down first
+    change mac addr changer: macchanger --mac=[addr] [interface]
+    random mac addr: macchanger -r [interface]
+    random mac addr same vendor: macchanger -e [interface]
+    reset mac: macchanger -p [interface]
+    display mac original & current mac: macchanger -s [interface]
 
 vmplayer network settings: vmware-netcfg
     - change vmnet0 interface depending on what configuration
@@ -201,6 +222,10 @@ python enviroment: virtualenv
 
 python packages: pip
     install requirements.txt: env/bin/pip install -r requirements.txt
+
+haskell modules/packages: cabal
+    install package: cabal --enable-shared --enable-executable-dynamic --disable-library-vanilla install [package]
+    compile file: ghc -dynamic [file]
 
 offline api/docset: zeal
 
@@ -235,6 +260,9 @@ bootloader: grub
         - /etc/grub.d for startup scripts
     generate grub.cfg: grub-mkconfig -o /boot/grub/grub.cfg
     - default kernel: /etc/default/grub: GRUB_DEFAULT=[kernel-image]
+    reinstall bootloader: grub-install --target=i386-pc [boot-disk]
+        - boot disk not partition
+    - If boot is moved, may need to reinstall grub, and reconfigure
 
 system information: uname
     kernel version: uname -r
@@ -276,6 +304,7 @@ Power device information: upower
     All power devices: upower -d
 
 brightness: xbacklight
+    set lowest brightness: xbacklight -set 0.12
 opacity: compton
 screen manager: Xrandr
     gui: ARandr
@@ -328,6 +357,8 @@ print end of file: tail
     print end of file as it updates: tail -f
         - can also be done with less +F
 
+count lines in output: [cmd] | wc -l
+
 show process: ps
     every process formated: ps -elf
     find process without grep match: ps -elf | grep [proc] | grep -v grep
@@ -351,6 +382,8 @@ escape alias: \[command]
 netcat: nc
     pipe command to ip: [command] | nc [ip] [port]
     listen on port: nc -l -p 8000
+
+pastebin for log output: [piped output] | nc termbin.com 9999
 
 find duplicate files in cwd: find -not -empty -type f -printf "%s\n" | sort -rn | uniq -d | xargs -I{} -n1 find -type f -size {}c -print0 | xargs -0 md5sum | sort | uniq -w32 --all-repeated=separate
 
