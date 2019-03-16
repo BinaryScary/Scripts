@@ -6,13 +6,14 @@ message=""
 if [[ $num_mail -gt 0 ]];then
     for i in $new_dir/*;do
         message="$message\n$(grep -m1 '^From: ' $i|sed 's/From: //'|sed 's/ <[^>]*>//')\n$(grep -m1 '^Subject: ' $i|sed 's/Subject: //')\n"
+        entry="$(grep -m1 '^From: ' $i|sed 's/From: //'|sed 's/ <[^>]*>//') $(grep -m1 '^Subject: ' $i|sed 's/Subject: //')"
+        # file is cleared on every reboot
+        if ! grep -Fxq "$entry" /home/sam/mailNotify
+        then
+            /home/sam/scripts/BashScript/root-notify-send "New Mail" "$message" &
+            echo "$entry" >> /home/sam/mailNotify
+        fi
     done
-    # file is cleared on every reboot
-    if ! grep -Fxq "$message" /home/sam/mailNotify
-    then
-        /home/sam/scripts/BashScript/root-notify-send "New Mail" "$message" &
-        printf "$message" > /home/sam/mailNotify
-    fi
     # aplay $HOME/.config/mail/mail-motherfucker.wav &
 fi
 
@@ -23,13 +24,14 @@ message=""
 if [[ $num_mail -gt 0 ]];then
     for i in $new_dir/*;do
         message="$message\n$(grep -m1 '^From: ' $i|sed 's/From: //'|sed 's/ <[^>]*>//')\n$(grep -m1 '^Subject: ' $i|sed 's/Subject: //')\n"
+        entry="$(grep -m1 '^From: ' $i|sed 's/From: //'|sed 's/ <[^>]*>//') $(grep -m1 '^Subject: ' $i|sed 's/Subject: //')"
+        # file is cleared on every reboot
+        if ! grep -Fxq "$entry" /home/sam/mailNotify
+        then
+            /home/sam/scripts/BashScript/root-notify-send "New Mail" "$message" &
+            echo "$entry" >> /home/sam/mailNotify
+        fi
     done
-    # file is cleared on every reboot
-    if ! grep -Fxq "$message" /home/sam/mailNotify
-    then
-        /home/sam/scripts/BashScript/root-notify-send "New Mail" "$message" &
-        printf "$message" > /home/sam/mailNotify
-    fi
     # aplay $HOME/.config/mail/mail-motherfucker.wav &
 fi
 
