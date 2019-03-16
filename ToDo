@@ -1,0 +1,30 @@
+arch:
+- Polybar
+- custom workspaces
+- zsh
+- todo list phone sync
+- optimize
+- logfile errors / shutdown errors
+- backups / pac backup / modules
+- auto mirror update
+- cpu freq scan
+- script path solution reorganize
+- qutebrowser
+- chrome show in folder fix
+- Lighterweight email and cal client?
+- conky
+- Dmenu useability scripts (dualmonitor?)
+- folder shortcuts
+- change GTK theme
+
+- archlabs
+- recreate arch in vm
+- firefox secured browsing (noscript, https everywhere, dark theme, ect)
+- awesomewm/sway/other wm (sidebar, dynamic tiling -> tabs)
+- create cheatsheet / todolist dmenu script
+    - create vim cheatsheet
+
+vim:
+
+ect:
+- setup osx VM

@@ -6,7 +6,6 @@ Browser: google-chrome-stable $mod+w
 Terminal: Terminator $mod+Return
 D-menu wrapper: rofi $mod+d
 spotify: spotify $mod+s
-mail: thunderbird $mod+m
 Task-manager: htop $mod+i
     System-monitor: glances
 move workstation: $mod+shift+m
@@ -43,7 +42,16 @@ sh to bash sym link check: file -h /bin/sh
 
 editor with last command: fc
 
-symbolic link: ln -s [absolute-path] [link]
+email: mutt, thunderbird
+    sync email: offlineimap
+    setup new email: /home/sam/Documents/Configs/.config/mutt/mutt-wizard.sh
+    setup indexer (find): notmuch setup
+
+link files: ln
+    symbolic link: ln -s [absolute-path] [link]
+        - can span partitions
+    hard link: ln [absolute-path] [link]
+        - can survive orginal file deletion
 
 scripts path: binary
     don't use (system/package binarys): /usr/bin, /sbin, /bin
@@ -67,6 +75,10 @@ Monitor:
     cli: xrandr
     gui: arandr
     daemon: autorandr
+
+Thinkpad dock: dockd
+    script hooks: /etc/dockd/[dock.hook, undock.hoo]
+        - must be executable
 
 Package Manager: pacman
     Update Packages: pacman -Syu
@@ -99,7 +111,11 @@ Remove Old/tmp Packages: paccache
     dry-run: paccache -d
     clean: paccache -r
 
-PGP import public key: gpg --recv-key [keyid]
+Encryption and signing: GNU Privacy Gaurd
+    generate a key: gpg --full-gen-key
+    encrypt file: gpg -r [key-recipient] -e [file]
+    decrypt file: gpg -d [file]
+    PGP import public key: gpg --recv-key [keyid]
 
 sha256 hash: sha256sum
     check hash: sha256sum [file]
@@ -292,6 +308,7 @@ i3 bar: i3blocks
     - sys scripts: /usr/lib/i3blocks
     - usr scripts: i3blocks
     - config: .i3blocks.conf
+    - refresh block: pkill -SIGRTMIN+[signal] i3blocks
 notifications: dunst
 
 battery notifier: cbatticon
@@ -318,6 +335,10 @@ Ranger default applications: /home/sam/.config/ranger/rifle.conf
     C-o or ranger-cd changed path
     C-n new tab
     yp / yn yank path or name
+    <C-l> run script
+    <C-f> local find
+    <C-g> global find
+    bg change background
 
 clipboard manager: greenclip
 
@@ -350,6 +371,15 @@ file system hierarchy: man hier
 later execution time: at
     run command later: [command] | at [time]
     - has to have atd daemon running
+
+fake clock time: faketime
+    set time for process: faketime '[time]' [proc]
+    set advanced time: faketime -f '[time]' [proc]
+        - can speed time up, slow down, or freeze
+    freeze time: faketime -f '[YYYY-MM-DD' hh:mm:ss]' [proc]
+        - add @ start time
+    speed/slow time: faketime -f '+/-[time adjust]m/h/d/y x[speed]' [proc]
+        - speed can be percent i.e 0,2 = 20%
 
 compare two files: diff
 

@@ -1,0 +1,37 @@
+#!/bin/bash
+new_dir="/home/sam/.mail/sam_hotmail/Inbox/new"
+num_mail=$(ls $new_dir|wc -l)
+message=""
+
+if [[ $num_mail -gt 0 ]];then
+    for i in $new_dir/*;do
+        message="$message\n$(grep -m1 '^From: ' $i|sed 's/From: //'|sed 's/ <[^>]*>//')\n$(grep -m1 '^Subject: ' $i|sed 's/Subject: //')\n"
+    done
+    # file is cleared on every reboot
+    if ! grep -Fxq "$message" /home/sam/mailNotify
+    then
+        /home/sam/scripts/BashScript/root-notify-send "New Mail" "$message" &
+        printf "$message" > /home/sam/mailNotify
+    fi
+    # aplay $HOME/.config/mail/mail-motherfucker.wav &
+fi
+
+new_dir="/home/sam/.mail/sam_cmail/INBOX/new"
+num_mail=$(ls $new_dir|wc -l)
+message=""
+
+if [[ $num_mail -gt 0 ]];then
+    for i in $new_dir/*;do
+        message="$message\n$(grep -m1 '^From: ' $i|sed 's/From: //'|sed 's/ <[^>]*>//')\n$(grep -m1 '^Subject: ' $i|sed 's/Subject: //')\n"
+    done
+    # file is cleared on every reboot
+    if ! grep -Fxq "$message" /home/sam/mailNotify
+    then
+        /home/sam/scripts/BashScript/root-notify-send "New Mail" "$message" &
+        printf "$message" > /home/sam/mailNotify
+    fi
+    # aplay $HOME/.config/mail/mail-motherfucker.wav &
+fi
+
+pkill -SIGRTMIN+12 i3blocks
+notmuch new &

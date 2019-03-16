@@ -1,0 +1,6 @@
+new_dir1="/home/sam/.mail/sam_hotmail/Inbox/new"
+new_dir2="/home/sam/.mail/sam_cmail/INBOX/new"
+num_mail=$(($(ls $new_dir1|wc -l) + $(ls $new_dir2|wc -l)))
+if [[ $num_mail -gt 0 ]];then
+    echo "$num_mail"
+fi

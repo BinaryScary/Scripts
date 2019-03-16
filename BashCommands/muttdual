@@ -1,0 +1,8 @@
+#!/bin/sh
+offlineimap &
+tmux new-session -d 'neomutt'
+tmux send-keys -l i1
+tmux split-window -h 'neomutt'
+tmux send-keys -l i2
+tmux last-pane
+tmux attach-session -d
