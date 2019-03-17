@@ -1,0 +1,6 @@
+#!/bin/bash
+sheet=$(ls /home/sam/Documents/Sheets| rofi -i -dmenu)
+if [ -n "$sheet" ]
+then
+    terminator -e "vim /home/sam/Documents/Sheets/$sheet"
+fi

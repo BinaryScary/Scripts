@@ -11,18 +11,19 @@ arch:
 - script path solution reorganize
 - qutebrowser
 - chrome show in folder fix
-- Lighterweight email and cal client?
 - conky
 - Dmenu useability scripts (dualmonitor?)
 - folder shortcuts
 - change GTK theme
-
-- archlabs
-- recreate arch in vm
-- firefox secured browsing (noscript, https everywhere, dark theme, ect)
+- try archlabs
 - awesomewm/sway/other wm (sidebar, dynamic tiling -> tabs)
-- create cheatsheet / todolist dmenu script
-    - create vim cheatsheet
+- firefox secured browsing (noscript, https everywhere, dark theme, ect)
+
+- create vim cheatsheet
+- recreate arch in vm
+
+- hard link configs (script location list) and git push
+- global copy (Shift-Insert)
 
 vim:
 

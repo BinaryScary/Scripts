@@ -40,6 +40,8 @@ shell shortcuts:
 sh to bash sym link check: file -h /bin/sh
     hard link check: find -L /bin -samefile /bin/sh
 
+derefrence link: readlink -f [link]
+
 editor with last command: fc
 
 email: mutt, thunderbird
@@ -59,6 +61,9 @@ scripts path: binary
         - add this to path
     all users: /usr/local/bin 
     root only: /usr/local/sbin
+
+wildcard all files including hidden: [cmd] {.,}*
+    - includes . and ../
 
 Enviroment Variables: env
     set env var: export [var]=[value]
@@ -388,6 +393,8 @@ print end of file: tail
         - can also be done with less +F
 
 count lines in output: [cmd] | wc -l
+silence output: [cmd] > /dev/null
+silence all output: [cmd] &> /dev/null
 
 show process: ps
     every process formated: ps -elf
@@ -416,6 +423,11 @@ netcat: nc
 pastebin for log output: [piped output] | nc termbin.com 9999
 
 find duplicate files in cwd: find -not -empty -type f -printf "%s\n" | sort -rn | uniq -d | xargs -I{} -n1 find -type f -size {}c -print0 | xargs -0 md5sum | sort | uniq -w32 --all-repeated=separate
+
+10 largest(size) directories in pwd: du -s * | sort -nr | head -n10
+10 largest(size) files in pwd: du . | sort -nr | head -n10
+
+directory tree analyzer(disk usage): baobab
 
 check installed distro: cat /etc/issue
 

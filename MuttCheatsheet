@@ -16,6 +16,9 @@ index:
     ;: command to all tagged
         - i.e: ;D: tag deletes
 
+query:
+    [name] <tab>: address lookup
+
 compose:
     E: edit header
     a: attachments

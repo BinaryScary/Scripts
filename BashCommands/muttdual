@@ -1,5 +1,5 @@
 #!/bin/sh
-offlineimap &
+offlineimap &> /dev/null &
 tmux new-session -d 'neomutt'
 tmux send-keys -l i1
 tmux split-window -h 'neomutt'
