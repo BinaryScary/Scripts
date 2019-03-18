@@ -1,0 +1,9 @@
+[Unit]
+Description=Run offlineimap
+
+[Timer]
+OnUnitInactiveSec=60s
+Unit=offlineimap.service
+
+[Install]
+WantedBy=timers.target

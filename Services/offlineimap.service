@@ -1,0 +1,13 @@
+[Unit]
+Description=OfflineIMAP Service
+After=network.target
+
+[Service]
+User=sam
+Environment=DISPLAY=:0
+Type=simple
+ExecStart=/usr/bin/offlineimap
+
+[Install]
+WantedBy=timers.target
+

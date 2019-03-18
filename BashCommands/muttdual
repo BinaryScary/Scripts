@@ -1,8 +1,16 @@
 #!/bin/sh
 offlineimap &> /dev/null &
-tmux new-session -d 'neomutt'
-tmux send-keys -l i1
-tmux split-window -h 'neomutt'
-tmux send-keys -l i2
-tmux last-pane
-tmux attach-session -d
+tmux list-sessions | grep email
+if [ "$?" == 0 ]
+then
+    tmux attach-session -t email
+else
+    tmux new-session -d 'neomutt'
+    tmux send-keys -l i1
+    tmux split-window -h 'neomutt'
+    tmux send-keys -l i2
+    tmux last-pane
+    tmux rename-session email
+    tmux attach-session -d
+    tmux kill-session
+fi
